@@ -1,13 +1,14 @@
 using Movies.Application;
+using Movies.Application.Database;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var configuration = builder.Configuration;
 // Add services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
-
+builder.Services.AddDatabase(configuration["Database:ConnectionString"]!);
 // CORS: Allow frontend
 builder.Services.AddCors(options =>
 {
@@ -53,5 +54,9 @@ else
 
 app.UseAuthorization();
 app.MapControllers();
+// In your Program.cs / Startup.cs
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
+var dbInitilaizer = app.Services.GetRequiredService<DbInitilaizer>();
+await dbInitilaizer.InitializeAsync();
 app.Run();

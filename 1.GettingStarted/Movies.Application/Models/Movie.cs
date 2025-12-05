@@ -1,10 +1,15 @@
-﻿namespace Movies.Application.Models;
+﻿using System.Text.RegularExpressions;
+
+namespace Movies.Application.Models;
 
 public class Movie
 {
     public required Guid Id{get;init;}
     public required string Title { get; init; }
-    
+
+    public string Slug => GenerateSlug();
+
+
     public required string Description { get; set; }
 
     public required int YearOfRelease { get; set; }
@@ -17,9 +22,9 @@ public class Movie
     
     public required string Director { get; set; }
 
-    public required List<string> Cast { get; init; } = new();
+    public required String[] CastList { get; init; } = Array.Empty<string>();
     
-    public required List<string> Genres { get; init; } = new();
+    public required String[] Genres { get; init; } = Array.Empty<string>();
 
     public required float Rating { get; set; } = 0;
     
@@ -27,5 +32,12 @@ public class Movie
     
     public required string VideoLink{get;init;}
   
+    private string GenerateSlug()
+    {
+        var sluggedTitle=Regex.Replace(Title,"[^0-9A-Za-z _-]",string.Empty).ToLower().Replace(" ","-");
+        return $"{sluggedTitle}-{YearOfRelease}";
+        
+    }
+    
 
 }

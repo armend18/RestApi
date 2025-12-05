@@ -20,8 +20,8 @@ public static class ContractMapping
             Age = request.Age,
             Director = request.Director,
             Country = request.Country,
-            Cast = request.Cast.ToList(),
-            Genres = request.Genres.ToList(),
+            CastList = request.CastList.ToArray(),
+            Genres = request.Genres.ToArray(),
             Rating = request.Rating,
             Cover = request.Cover,
             VideoLink = request.VideoLink
@@ -35,13 +35,14 @@ public static class ContractMapping
         {
             Id = movie.Id,
             Title = movie.Title,
+            Slug = movie.Slug,
             Description = movie.Description,
             YearOfRelease = movie.YearOfRelease,
             RunTime = movie.RunTime,
             Age = movie.Age,
             Director = movie.Director,
             Country = movie.Country,
-            Cast = movie.Cast.ToList(),
+            Cast = movie.CastList.ToList(),
             Genres = movie.Genres.ToList(),
             Rating =movie.Rating,
             Cover = movie.Cover,
@@ -68,8 +69,9 @@ public static class ContractMapping
             Age = request.Age,
             Director = request.Director,
             Country = request.Country,
-            Cast = request.Cast.ToList(),
-            Genres = request.Genres.ToList(),
+            CastList = request.CastList.ToArray(),
+            Genres = request.Genres.ToArray(),
+
             Rating = request.Rating,
             Cover = request.Cover,
             VideoLink = request.VideoLink

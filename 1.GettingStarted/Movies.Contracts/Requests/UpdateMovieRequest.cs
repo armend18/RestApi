@@ -17,7 +17,7 @@ public class UpdateMovieRequest
     
     public required string Director { get; set; }
 
-    public required List<string> Cast { get; init; } = new();
+    public required List<string> CastList { get; init; } = new();
     
     public required List<string> Genres { get; init; } = new();
 
