@@ -1,4 +1,5 @@
 using Movies.Application;
+using Movies.Application.Data;
 using Movies.Application.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
-builder.Services.AddDatabase(configuration["Database:ConnectionString"]!);
+builder.Services.AddDbContext<MoviesContext>();
+// builder.Services.AddDatabase(configuration["Database:ConnectionString"]!);
 // CORS: Allow frontend
 builder.Services.AddCors(options =>
 {
@@ -22,6 +24,13 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+//remove later
+var scope=app.Services.CreateScope();
+var context=scope.ServiceProvider.GetRequiredService<MoviesContext>();
+context.Database.EnsureCreated();
+context.Database.EnsureCreated();
+
 
 // Pipeline
 if (app.Environment.IsDevelopment())
@@ -52,11 +61,12 @@ else
     app.UseHttpsRedirection();
 }
 
+
 app.UseAuthorization();
 app.MapControllers();
-// In your Program.cs / Startup.cs
-Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-var dbInitilaizer = app.Services.GetRequiredService<DbInitilaizer>();
-await dbInitilaizer.InitializeAsync();
+// Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+// var dbInitilaizer = app.Services.GetRequiredService<DbInitilaizer>();
+// await dbInitilaizer.InitializeAsync();
 app.Run();
