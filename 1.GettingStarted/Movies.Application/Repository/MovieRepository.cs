@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using Dapper;
-using Movies.Application.Database;
+
 using Movies.Application.Models;
 
 namespace Movies.Application.Repository;
