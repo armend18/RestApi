@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Movies.Application;
-using Movies.Application.Database;
+using Movies.Application.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -7,8 +9,9 @@ var configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApplication();
-builder.Services.AddDatabase(configuration["Database:ConnectionString"]!);
+
+builder.Services.AddDbContext<MoviesContext>();
+// builder.Services.AddDatabase(configuration["Database:ConnectionString"]!);
 // CORS: Allow frontend
 builder.Services.AddCors(options =>
 {
@@ -22,6 +25,17 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+//remove later
+var scope=app.Services.CreateScope();
+var context=scope.ServiceProvider.GetRequiredService<MoviesContext>();
+
+var pendingMigrations= await context.Database.GetPendingMigrationsAsync();
+if (pendingMigrations.Count() > 0)
+{
+    throw new Exception("Database is not fully migrated.");
+}
+
 
 // Pipeline
 if (app.Environment.IsDevelopment())
@@ -52,11 +66,12 @@ else
     app.UseHttpsRedirection();
 }
 
+
 app.UseAuthorization();
 app.MapControllers();
-// In your Program.cs / Startup.cs
-Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-var dbInitilaizer = app.Services.GetRequiredService<DbInitilaizer>();
-await dbInitilaizer.InitializeAsync();
+// Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+// var dbInitilaizer = app.Services.GetRequiredService<DbInitilaizer>();
+// await dbInitilaizer.InitializeAsync();
 app.Run();
