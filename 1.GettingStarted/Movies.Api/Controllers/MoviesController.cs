@@ -83,8 +83,24 @@ public class MoviesController: ControllerBase
         var filteredMovies = await _context.Movies.Where(m => m.Genres.Contains(genre)).ToListAsync();
         return Ok(filteredMovies.MapToResponse());
     }
-    
-    
+
+    [HttpGet(ApiEndpoints.Movies.GetTopMovies)]
+    public async Task<IActionResult> GetTopMovies([FromQuery] int limit =5)
+    {
+        var topMovies= await _context.Movies.OrderByDescending(m => m.Rating).Take(limit).ToListAsync();
+        return Ok(topMovies.MapToResponse());
+    }
+    [HttpGet(ApiEndpoints.Movies.GetLatestMovies)]
+    public async Task<IActionResult> GetLatestMovies([FromQuery] int limit =5)
+    {
+        var latestMovies = await _context.Movies
+            .OrderByDescending(m => m.DateCreated)
+            .Take(limit)
+            .ToListAsync();
+
+        return Ok(latestMovies);
+    }
+
 
 }
 

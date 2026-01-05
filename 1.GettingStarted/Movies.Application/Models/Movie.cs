@@ -31,6 +31,8 @@ public class Movie
     public required string Cover{get;set;}
     
     public required string VideoLink{get;init;}
+    
+    public DateOnly DateCreated=DateOnly.FromDateTime(DateTime.Now);
   
     private string GenerateSlug()
     {

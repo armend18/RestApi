@@ -16,6 +16,12 @@ public static class ApiEndpoints
         public const string Update = $"{Base}/{{id:guid}}";
         public const string Delete = $"{Base}/{{id:guid}}";
         public const string GetByGenre = $"{Base}/genre/{{genre}}";
+        public const string GetTopMovies = $"{Base}/topmovies";
+        public const string GetLatestMovies = $"{Base}/latest";
+        public const string GetLatestReviews = $"{Base}/topratedmovies";
+        public const string GetLatestUsers= $"{Base}/latestusers";
+        
+
 
     }
 

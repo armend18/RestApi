@@ -24,7 +24,8 @@ public static class ContractMapping
             Genres = request.Genres.ToArray(),
             Rating = request.Rating,
             Cover = request.Cover,
-            VideoLink = request.VideoLink
+            VideoLink = request.VideoLink,
+            DateCreated=new DateOnly()
             
         };
     }
@@ -47,6 +48,7 @@ public static class ContractMapping
             Rating =movie.Rating,
             Cover = movie.Cover,
             VideoLink = movie.VideoLink,
+            
         };
     }
 
@@ -57,11 +59,11 @@ public static class ContractMapping
             Items = movies.Select(MapToResponse)
         };
     }
-    public static Movie MapToMovie(this UpdateMovieRequest request,Guid id)
+    public static Movie MapToMovie(this UpdateMovieRequest request)
     {
         return new Movie
         {
-            Id = id,
+            Id = request.Id,
             Title = request.Title,
             Description = request.Description,
             YearOfRelease = request.YearOfRelease,

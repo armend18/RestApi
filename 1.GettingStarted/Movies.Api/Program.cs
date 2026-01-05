@@ -45,7 +45,12 @@ if (app.Environment.IsDevelopment())
 }
 
 // IMPORTANT: CORS MUST BE BEFORE AUTH and MAPCONTROLLERS
-app.UseCors("AllowFrontend");
+app.UseCors(opts =>
+{
+    opts.AllowAnyOrigin();
+    opts.AllowAnyMethod();
+    opts.AllowAnyHeader();
+});
 
 // --- ERROR WAS HERE ---
 // You had app.UseHttpsRedirection(); running here unconditionally.
