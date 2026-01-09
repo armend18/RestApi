@@ -98,7 +98,7 @@ public class MoviesController: ControllerBase
             .Take(limit)
             .ToListAsync();
 
-        return Ok(latestMovies);
+        return Ok(latestMovies.MapToResponse());
     }
 
 

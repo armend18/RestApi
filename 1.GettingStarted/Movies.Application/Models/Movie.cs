@@ -32,7 +32,7 @@ public class Movie
     
     public required string VideoLink{get;init;}
     
-    public DateOnly DateCreated=DateOnly.FromDateTime(DateTime.Now);
+    public DateOnly DateCreated{ get; set; }=DateOnly.FromDateTime(DateTime.Now);
   
     private string GenerateSlug()
     {
