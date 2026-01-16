@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Movies.Api.Mapping;
+using Movies.Application.AuthModels;
 using Movies.Application.Data;
-using Movies.Application.Models;
-using Movies.Application.Repository;
+
 using Movies.Contracts.Requests;
 
 namespace Movies.Api.Controllers;
 [ApiController]
-
+//remove after test
+[Authorize(Roles = UserRoles.Admin+","+UserRoles.User)]
 
 public class MoviesController: ControllerBase
 {

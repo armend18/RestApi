@@ -24,6 +24,14 @@ public static class ApiEndpoints
 
 
     }
+    public static class Users
+    {
+        private const string Base = $"{ApiBase}/authentication";
+        public const string Authenticate = Base;
+        public const string Register = Base + "/register";
+        public const string Login = Base + "/login";
+        public const string RefreshToken = Base + "/refreshtoken";
+    }
 
     
     

@@ -1,20 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Movies.Application.Models;
 
 namespace Movies.Application.Data;
 
-public class MoviesContext: DbContext
+public class MoviesContext : IdentityDbContext<User>
 {
-    public DbSet<Movie> Movies=> Set<Movie>();
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public MoviesContext(DbContextOptions<MoviesContext> options)
+        : base(options)
     {
-        optionsBuilder.UseSqlServer(
-            "Data Source=localhost;Initial Catalog=Movies;User ID=sa;Pwd=123Nukedi;TrustServerCertificate=true",
-            b => b.MigrationsAssembly("Movies.Api") 
-        );
-
-        base.OnConfiguring(optionsBuilder);
     }
+
+    public DbSet<Movie> Movies => Set<Movie>();
+    public DbSet<User> Users=> Set<User>();
     
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 }
