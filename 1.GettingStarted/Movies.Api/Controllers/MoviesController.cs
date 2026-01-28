@@ -10,7 +10,7 @@ using Movies.Contracts.Requests;
 namespace Movies.Api.Controllers;
 [ApiController]
 //remove after test
-[Authorize(Roles = UserRoles.Admin+","+UserRoles.User)]
+// [Authorize(Roles = UserRoles.Admin+","+UserRoles.User)]
 
 public class MoviesController: ControllerBase
 {
@@ -82,8 +82,9 @@ public class MoviesController: ControllerBase
     public async Task<IActionResult> GetByGenre([FromRoute] string genre)
     {
 
-        var filteredMovies = await _context.Movies.Where(m => m.Genres.Contains(genre)).ToListAsync();
-        return Ok(filteredMovies.MapToResponse());
+        // var filteredMovies = await _context.Movies.Where(m => m.Genres.Contains(genre)).ToListAsync();
+        // return Ok(filteredMovies.MapToResponse());
+        return Ok();
     }
 
     [HttpGet(ApiEndpoints.Movies.GetTopMovies)]

@@ -18,10 +18,10 @@ public static class ContractMapping
             YearOfRelease = request.YearOfRelease,
             RunTime = request.RunTime,
             Age = request.Age,
-            Director = request.Director,
+            // Director = request.Director,
             Country = request.Country,
-            CastList = request.CastList.ToArray(),
-            Genres = request.Genres.ToArray(),
+            // CastList = request.CastList.ToArray(),
+            // Genres = request.Genres.ToArray(),
             Rating = request.Rating,
             Cover = request.Cover,
             VideoLink = request.VideoLink,
@@ -36,19 +36,22 @@ public static class ContractMapping
         {
             Id = movie.Id,
             Title = movie.Title,
-            Slug = movie.Slug,
+         
             Description = movie.Description,
             YearOfRelease = movie.YearOfRelease,
             RunTime = movie.RunTime,
             Age = movie.Age,
-            Director = movie.Director,
+            // Director = movie.Director,
             Country = movie.Country,
-            Cast = movie.CastList.ToList(),
-            Genres = movie.Genres.ToList(),
-            Rating =movie.Rating,
+            // Cast = movie.CastList.ToList(),
+            // Genres = movie.Genres.ToList(),
+            Rating = movie.Rating,
             Cover = movie.Cover,
             VideoLink = movie.VideoLink,
-            
+            Director = null,
+            Cast = null,
+            Genres = null,
+
         };
     }
 
@@ -69,10 +72,10 @@ public static class ContractMapping
             YearOfRelease = request.YearOfRelease,
             RunTime = request.RunTime,
             Age = request.Age,
-            Director = request.Director,
+            // Director = request.Director,
             Country = request.Country,
-            CastList = request.CastList.ToArray(),
-            Genres = request.Genres.ToArray(),
+            // CastList = request.CastList.ToArray(),
+            // Genres = request.Genres.ToArray(),
 
             Rating = request.Rating,
             Cover = request.Cover,
